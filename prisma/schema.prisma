@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Profile {
+  id        String   @id @default("default")
+  name      String   @default("Your Name")
+  bio       String?
+  avatarUrl String?
+  updatedAt DateTime @updatedAt
+}
+
+model Link {
+  id        String   @id @default(cuid())
+  title     String
+  url       String
+  icon      String   @default("link")
+  category  String   @default("custom")
+  color     String   @default("#FF6B6B")
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Music {
+  id        String   @id @default(cuid())
+  title     String
+  artist    String
+  url       String
+  coverUrl  String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Admin {
+  id       String @id @default("admin")
+  password String
+}
